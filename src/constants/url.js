@@ -1,0 +1,1 @@
+export const BASE_URL_BE = import.meta.env.VITE_BASE_URL_BE + "/api"

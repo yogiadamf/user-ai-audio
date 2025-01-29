@@ -6,6 +6,7 @@ export const postInformation = (data) => {
         sameSite: "strict",
         expires: 1
     });
+    return data;
 };
 
 export const getInformation = () => {

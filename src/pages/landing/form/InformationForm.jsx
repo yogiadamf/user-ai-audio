@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { informationSchema } from "@/schema/InformationSchema";
 import { useMutation } from "@tanstack/react-query";
-import { getInformation, postInformation } from "@/api/apiService";
 import {
   Form,
   FormControl,
@@ -30,6 +29,7 @@ import {
 } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
+import useUserStore from "@/store/userStore";
 
 const availableAges = [];
 for (let i = 10; i <= 65; i++) {
@@ -37,6 +37,7 @@ for (let i = 10; i <= 65; i++) {
 }
 
 export function InformationForm() {
+  const postUser = useUserStore((state) => state.postUser);
   const form = useForm({
     resolver: zodResolver(informationSchema),
     defaultValues: {
@@ -47,7 +48,7 @@ export function InformationForm() {
   });
 
   const { mutate, isPending } = useMutation({
-    mutationFn: postInformation,
+    mutationFn: postUser,
   });
 
   const onSubmit = useCallback(
@@ -184,7 +185,7 @@ export function InformationForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={isPending} >
+        <Button type="submit" disabled={isPending}>
           {!isPending && "Simpan"}
           {isPending && <Loader2 className="animate-spin" />}
         </Button>

@@ -1,11 +1,11 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Card, CardContent } from "@/components/ui/card";
-import { Info } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Info, User } from "lucide-react";
 
 const ChatPage = () => {
   return (
     <div className="flex flex-col gap-4">
-      <Alert className="bg-secondary">
+      <Alert variant="info">
         <Info className="h-4 w-4" />
         <AlertTitle>
           Selamat datang di sesi ini. Kami sangat senang Anda bisa
@@ -20,10 +20,15 @@ const ChatPage = () => {
           gunakan waktu dengan sebaik-baiknya.
         </AlertDescription>
       </Alert>
-      <Card>
-        <CardContent>
-          ppppp
-        </CardContent>
+      <Card className="p-4 bg-secondary border-secondary">
+        <User size={18} />
+        <div className="font-semibold">Pertanyaan 1</div>
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore natus
+          obcaecati accusantium vitae doloribus dolorem ipsa quia, aut et quo
+          blanditiis illum molestias quasi distinctio quod alias maxime deleniti
+          nisi.
+        </div>
       </Card>
     </div>
   );

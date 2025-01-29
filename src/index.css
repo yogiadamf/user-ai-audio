@@ -66,6 +66,8 @@
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
+    --info: 205 92% 95%;
+    --info-foreground: 206 89% 45%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
     --accent: 210 40% 96.1%;
@@ -100,8 +102,10 @@
     --popover-foreground: 210 40% 98%;
     --primary: 211.01 85.7% 34.9%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 210 4% 21%;
     --secondary-foreground: 210 40% 98%;
+    --info: 212, 69%, 16%;
+    --info-foreground: 211 100% 71%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
     --accent: 217.2 32.6% 17.5%;
@@ -133,7 +137,7 @@
   }
 
   body {
-    @apply bg-background text-foreground scroll-smooth font-inter;
+    @apply bg-background text-foreground scroll-smooth font-inter text-sm;
   }
 
   ::-webkit-scrollbar {

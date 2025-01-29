@@ -12,6 +12,7 @@ const alertVariants = cva(
         default: "bg-background text-foreground",
         destructive:
           "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive",
+        info: "bg-info text-info-foreground border-info [&>svg]:text-info-foreground",
       },
     },
     defaultVariants: {
@@ -29,7 +30,7 @@ const Alert = React.forwardRef(({ className, variant, ...props }, ref) => (
 ))
 Alert.propTypes = {  
   className: PropTypes.string,
-  variant: PropTypes.oneOf(["default", "destructive"]),
+  variant: PropTypes.oneOf(["default", "destructive", "info"]),
 }
 Alert.displayName = "Alert"
 

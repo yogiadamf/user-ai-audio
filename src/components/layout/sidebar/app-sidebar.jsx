@@ -1,4 +1,3 @@
-import { AudioWaveform, GalleryVerticalEnd, MessageSquare } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -12,25 +11,6 @@ import {
 } from "@/components/ui/sidebar";
 
 // This is sample data.
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  teams: [
-    {
-      name: "PT. XXX",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-  ],
-};
 
 export function AppSidebar({ ...props }) {
   return (

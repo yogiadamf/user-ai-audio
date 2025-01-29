@@ -44,7 +44,7 @@ export function Datatable({ table, children, className, ...props }) {
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header, index) => {
+                {headerGroup.headers.map((header) => {
                   const { column } = header;
                   return (
                     <TableHead

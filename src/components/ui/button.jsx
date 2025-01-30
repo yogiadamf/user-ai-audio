@@ -26,8 +26,18 @@ Button.propTypes = {
     "outline",
     "ghost",
     "destructive",
+    "outlinePrimary",
+    "ghostDestructive",
   ]),
-  size: PropTypes.oneOf(["xs", "sm", "md", "lg", "icon", "iconSm"]),
+  size: PropTypes.oneOf([
+    "xs",
+    "sm",
+    "md",
+    "lg",
+    "icon",
+    "iconSm",
+    "iconRounded",
+  ]),
   asChild: PropTypes.bool,
 };
 Button.displayName = "Button";

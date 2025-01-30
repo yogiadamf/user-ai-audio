@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { loadLayersModel, tensor } from "@tensorflow/tfjs";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const LoadModel = () => {
   const [model, setModel] = useState(null);

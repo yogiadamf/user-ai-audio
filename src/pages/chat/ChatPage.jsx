@@ -1,6 +1,7 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card } from "@/components/ui/card";
-import { Info, User } from "lucide-react";
+import { Info } from "lucide-react";
+import VoiceRecorder from "@/components/custom/VoiceRecorder";
 
 const ChatPage = () => {
   return (
@@ -21,7 +22,6 @@ const ChatPage = () => {
         </AlertDescription>
       </Alert>
       <Card className="p-4 bg-secondary border-secondary">
-        <User size={18} />
         <div className="font-semibold">Pertanyaan 1</div>
         <div>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore natus
@@ -30,6 +30,7 @@ const ChatPage = () => {
           nisi.
         </div>
       </Card>
+      <VoiceRecorder />
     </div>
   );
 };

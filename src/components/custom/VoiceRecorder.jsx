@@ -4,11 +4,16 @@ import { Card } from "@/components/ui/card";
 import { ArrowRight, Mic, Pause, Play, Square } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ResetDialog } from "./ResetDialog";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
+import { toast } from "sonner";
 
 const VoiceRecorder = () => {
   const [isStarted, setIsStarted] = useState(false);
   const [isStopped, setIsStopped] = useState(false);
   const [isPlayed, setIsPlayed] = useState(false);
+
   const recorderControls = useVoiceVisualizer();
 
   const {
@@ -23,6 +28,17 @@ const VoiceRecorder = () => {
     clearCanvas,
   } = recorderControls;
 
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
+  if (!browserSupportsSpeechRecognition) {
+    return toast.error("Browser tidak mendukung fitur speech recognition");
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <Card className="p-4 flex flex-col items-center justify-center gap-4 min-h-[250px]">
@@ -35,10 +51,13 @@ const VoiceRecorder = () => {
               <Button
                 variant="outlinePrimary"
                 size="iconRounded"
-                className="[&_svg]:size-6 border-2"
+                className="[&_svg]:size-6 border-[4px]"
                 onClick={() => {
                   startRecording();
                   setIsStarted(true);
+                  SpeechRecognition.startListening({
+                    continuous: true,
+                  });
                 }}
               >
                 <Mic />
@@ -52,6 +71,7 @@ const VoiceRecorder = () => {
               controls={recorderControls}
               isRecording={isRecordingInProgress}
               mainBarColor="blue"
+              width={"95%"}
               secondaryBarColor="lightblue"
               isDefaultUIShown={false}
               isControlPanelShown={false}
@@ -71,7 +91,7 @@ const VoiceRecorder = () => {
                   <Button
                     variant="outlinePrimary"
                     size="iconRounded"
-                    className="[&_svg]:size-6 border-2"
+                    className="[&_svg]:size-6 border-[4px]"
                     onClick={() => {
                       togglePauseResume();
                       setIsPlayed((prev) => !prev);
@@ -109,8 +129,10 @@ const VoiceRecorder = () => {
                     </Button>
                     <Button
                       onClick={() => {
-                        stopRecording();
+                        SpeechRecognition.stopListening();
                         setIsStopped(true);
+                        stopRecording();
+                        resetTranscript();
                       }}
                     >
                       <Square fill="white" /> Stop
@@ -121,7 +143,14 @@ const VoiceRecorder = () => {
             </div>
           </div>
         )}
+        <p>{transcript}</p>
       </Card>
+      {isPausedRecording && (
+        <Card className="p-4 bg-secondary border-secondary text-center animate-pulse">
+          Rekaman dijeda, tekan Resume untuk melanjutkan dan tekan Stop untuk
+          melihat pratinjau dan menyimpan rekaman Anda
+        </Card>
+      )}
       {isStarted && (
         <Button className="ml-auto" disabled={!isStopped}>
           Selanjutnya <ArrowRight />

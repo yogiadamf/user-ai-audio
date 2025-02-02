@@ -15,6 +15,7 @@ import {
   NotFound,
   SomethingWentWrong,
 } from "./routes/pageRoutes";
+import { Toaster } from "sonner";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,6 +38,7 @@ const App = () => {
   return (
     <ErrorBoundary FallbackComponent={SomethingWentWrong}>
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        <Toaster richColors position="top-right" />
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools />
           <BrowserRouter
@@ -48,7 +50,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<UnauthenticatedRoutes />}>
                 <Route
-                  path=""
+                  path="user-information"
                   element={
                     <Loadable>
                       <LandingPage />

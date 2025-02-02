@@ -8,11 +8,13 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import { toast } from "sonner";
+import { handleGenerateText } from "@/lib/gemini";
+import { postAudio } from "@/api/apiService";
 
-const VoiceRecorder = () => {
+const VoiceRecorder = ({ user }) => {
   const [isStarted, setIsStarted] = useState(false);
   const [isStopped, setIsStopped] = useState(false);
-  const [isPlayed, setIsPlayed] = useState(false);
+  const [isPlayed, setIsPlayed] = useState(false);  
 
   const recorderControls = useVoiceVisualizer();
 
@@ -28,16 +30,40 @@ const VoiceRecorder = () => {
     clearCanvas,
   } = recorderControls;
 
-  const {
-    transcript,
-    listening,
-    resetTranscript,
-    browserSupportsSpeechRecognition,
-  } = useSpeechRecognition();
+  const { transcript, resetTranscript, browserSupportsSpeechRecognition } =
+    useSpeechRecognition();
 
   if (!browserSupportsSpeechRecognition) {
     return toast.error("Browser tidak mendukung fitur speech recognition");
   }
+
+  const handleNext = async () => {
+    try {
+      const inputText =
+        localStorage.getItem("transcript") +
+        ". Berikan pertanyaan selanjutnya yang relevan";
+      const result = await handleGenerateText(inputText);      
+
+      // const username = user.username.replace(/\s+/g, "_");
+      // const fileName = `02_${username}_${user.gender}_${user.age}_recording.webm`;
+      // const file = new File([recordedBlob], fileName, {
+      //   type: "audio/webm",
+      // });
+      // const formData = new FormData();
+      // formData.append("audio", file);
+      // formData.append("filename", fileName);
+      // formData.append("user_id", user.user_id);
+
+      // await postAudio(formData);
+      // toast.success("Rekaman berhasil disimpan", {
+      //   id: "store-audio",
+      // });
+    } catch (error) {
+      toast.error("Maaf, terjadi kesalahan. Silahkan coba lagi", {
+        id: "store-audio",
+      });
+    }
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -132,6 +158,7 @@ const VoiceRecorder = () => {
                         SpeechRecognition.stopListening();
                         setIsStopped(true);
                         stopRecording();
+                        localStorage.setItem("transcript", transcript);
                         resetTranscript();
                       }}
                     >
@@ -151,8 +178,8 @@ const VoiceRecorder = () => {
           melihat pratinjau dan menyimpan rekaman Anda
         </Card>
       )}
-      {isStarted && (
-        <Button className="ml-auto" disabled={!isStopped}>
+      {!isStarted && (
+        <Button className="ml-auto" disabled={isStopped} onClick={handleNext}>
           Selanjutnya <ArrowRight />
         </Button>
       )}

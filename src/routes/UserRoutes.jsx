@@ -5,7 +5,7 @@ import MainLayout from "@/components/layout/MainLayout";
 const UserRoutes = () => {
   const user = Cookies.get("user_information");
 
-  return user ? <MainLayout /> : <Navigate to="/" />;
+  return user ? <MainLayout /> : <Navigate to="/user-information" />;
 };
 
 export default UserRoutes;

@@ -7,10 +7,10 @@ const UnauthenticatedRoutes = () => {
 
   return user ? (
     <Navigate to="/chat" />
-  ) : location.pathname === "/" ? (
+  ) : location.pathname === "/user-information" ? (
     <Outlet />
   ) : (
-    <Navigate to="/" />
+    <Navigate to="/user-information" />
   );
 };
 

@@ -30,6 +30,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
 import useUserStore from "@/store/userStore";
+import { v4 as uuidv4 } from "uuid";
 
 const availableAges = [];
 for (let i = 10; i <= 65; i++) {
@@ -42,7 +43,7 @@ export function InformationForm() {
     resolver: zodResolver(informationSchema),
     defaultValues: {
       username: "",
-      usia: "",
+      age: "",
       gender: "Laki-laki",
     },
   });
@@ -53,7 +54,10 @@ export function InformationForm() {
 
   const onSubmit = useCallback(
     (values) => {
-      mutate(values);
+      mutate({
+        user_id: uuidv4(),
+        ...values,
+      });
     },
     [mutate]
   );
@@ -125,7 +129,7 @@ export function InformationForm() {
         />
         <FormField
           control={form.control}
-          name="usia"
+          name="age"
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <FormLabel className="flex gap-1 items-center">
@@ -162,7 +166,7 @@ export function InformationForm() {
                             value={age.label}
                             key={age.value}
                             onSelect={() => {
-                              form.setValue("usia", age.value);
+                              form.setValue("age", age.value);
                             }}
                           >
                             {age.label}

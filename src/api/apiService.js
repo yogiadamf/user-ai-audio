@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import apiInstance from "./apiInstance";
 
 export const postInformation = (data) => {
     Cookies.set("user_information", JSON.stringify(data), {
@@ -16,4 +17,8 @@ export const getInformation = () => {
 
 export const deleteInformation = () => {
     Cookies.remove("user_information");
+};
+
+export const postAudio = async (data) => {
+   await apiInstance.post("/store-audio", data);
 };

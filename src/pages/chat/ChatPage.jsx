@@ -2,8 +2,12 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card } from "@/components/ui/card";
 import { Info } from "lucide-react";
 import VoiceRecorder from "@/components/custom/VoiceRecorder";
+import GenerativeAiComponent from "./GeminiApi";
+import useUserStore from "@/store/userStore";
+import ChatApp from "./ChatApp";
 
 const ChatPage = () => {
+  const { user } = useUserStore();
   return (
     <div className="flex flex-col gap-4">
       <Alert variant="info">
@@ -23,14 +27,11 @@ const ChatPage = () => {
       </Alert>
       <Card className="p-4 bg-secondary border-secondary">
         <div className="font-semibold">Pertanyaan 1</div>
-        <div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore natus
-          obcaecati accusantium vitae doloribus dolorem ipsa quia, aut et quo
-          blanditiis illum molestias quasi distinctio quod alias maxime deleniti
-          nisi.
-        </div>
+        <div>Bagaimana kamu melihat dirimu sekarang ?</div>
       </Card>
-      <VoiceRecorder />
+      <VoiceRecorder user={user} />
+      {/* <ChatApp/> */}
+      {/* <GenerativeAiComponent /> */}
     </div>
   );
 };

@@ -24,7 +24,7 @@ export function AppSidebar({ ...props }) {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton isActive={true}>
-                <span>1. Pernahkah Punya pengalaman yang menarik</span>
+                <span>1. Bagaimana kamu melihat dirimu sekarang ?</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>

@@ -25,6 +25,7 @@ export function Topbar() {
               className="-ml-2"
               onClick={() => {
                 Cookies.remove("user_information");
+                localStorage.clear();
                 setUser(null);
               }}
             >

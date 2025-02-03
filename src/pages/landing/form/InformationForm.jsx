@@ -33,7 +33,7 @@ import useUserStore from "@/store/userStore";
 import { v4 as uuidv4 } from "uuid";
 
 const availableAges = [];
-for (let i = 10; i <= 65; i++) {
+for (let i = 10; i <= 50; i++) {
   availableAges.push({ value: i.toString(), label: i.toString() });
 }
 

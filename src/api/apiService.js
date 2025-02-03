@@ -2,10 +2,17 @@ import Cookies from "js-cookie";
 import apiInstance from "./apiInstance";
 
 export const postInformation = (data) => {
+    const now = new Date();
+    const midnight = new Date();
+    midnight.setHours(24, 0, 0, 0); // Set to next midnight (00:00)
+
+    // Calculate the difference in milliseconds and convert to days
+    const timeUntilMidnight = (midnight - now) / 1000 / 60 / 60 / 24;
+
     Cookies.set("user_information", JSON.stringify(data), {
         secure: true,
         sameSite: "strict",
-        expires: 1
+        expires: timeUntilMidnight,
     });
     return data;
 };
